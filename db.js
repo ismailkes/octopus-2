@@ -1,0 +1,10 @@
+module.exports={
+  articles:[
+      {
+          id:1,
+          title:"abbb",
+          description:"aabbaa",
+          prix:100
+      }
+  ]
+}

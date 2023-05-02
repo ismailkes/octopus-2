@@ -1,0 +1,55 @@
+<div class="container">
+   <div class="row mt-2">
+    <div class=" col-md-4 ">
+      <a class="btn btn-primary" routerLink="/add"> <i class="bi bi-plus-square-fill"></i> Ajouter un nouveau produit</a>
+    </div>
+    <div class="col col-md-6 offset-md-2">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control"[(ngModel)]="searchTitle" placeholder=" Rechercher title" aria-label="Recipient's username" aria-describedby="button-addon2" >
+        <button class="btn btn-outline-primary" (click)="search()"type="button" id="btnsearch"><i class="bi bi-search"></i>Chercher</button>
+      </div>
+    </div>
+
+   </div>
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of allArticles$ | async">
+              <th scope="row">{{item.id}}</th>
+              <td>{{item.title}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.prix}}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" [routerLink]="['edit', item.id]" ><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-danger btn-sm" (click)="openConfirmationModal(item.id)"><i class="bi bi-trash-fill"></i></button>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmer la suppression</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        vous etes sur de vouloir Supprimer l'article ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-danger" (click)="delete()">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>

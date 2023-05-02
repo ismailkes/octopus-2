@@ -1,0 +1,91 @@
+<div class="container">
+
+   <h2>Ajouter un Article </h2>
+ 
+   <form [formGroup]="articleForm" #formDir="ngForm" class="was-validated col-md-4">
+ 
+     <div [hidden]="formDir.submitted">
+ 
+       <div class="cross-validation" [class.cross-validation-error]="articleForm.errors?.['identityRevealed'] && (articleForm.touched || articleForm.dirty)">
+         
+         
+         <div class="form-group">
+ 
+           <label for="title">Title</label>
+
+           <input type="text" id="title" class="form-control"
+                 formControlName="title" required 
+                 
+                 [(ngModel)]="articlesForm.title"
+                 >
+                 <div class="invalid-feedback">
+                  Veuillez remplir ce champ.
+                </div>
+ 
+           <div *ngIf="title.invalid && (title.dirty || title.touched)" class="invalid-feedback">
+ 
+             <div *ngIf="title.errors?.['required']" class="invalid-feedback">title is required.</div>
+             <div *ngIf="title.errors?.['minlength']">title must be at least 4 characters long.</div>
+
+           </div>
+         </div>
+
+         <div class="form-group">
+ 
+            <label for="description">Description</label>
+ 
+            <input type="text" id="description" class="form-control"
+                  formControlName="description" required 
+                  
+                  [(ngModel)]="articlesForm.description"
+                  >
+                  <div class="invalid-feedback">
+                     Veuillez remplir ce champ.
+                   </div>
+  
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="invalid-feedback">
+  
+              <div *ngIf="description.errors?.['required']" class="invalid-feedback">description is required.</div>
+              <div *ngIf="description.errors?.['minlength']">title must be at least 10 characters long.</div>
+ 
+            </div>
+          </div>
+
+         <div class="form-group">
+            <label for="prix">Prix</label>
+            <input type="number" id="prix" class="form-control"
+                formControlName="prix"
+                [(ngModel)]="articlesForm.prix"
+                >
+                <div class="invalid-feedback">
+                  Veuillez Ajouter le Prix.
+                </div>
+                
+  
+            <div *ngIf="prix.invalid" class="invalid-feedback">
+              <div *ngIf="prix.errors?.['required']">prix is required.</div>
+            </div>
+         </div>
+ 
+        
+ 
+        
+       </div>
+ 
+      
+ 
+       <p>Veuillez remplir tous les champs pour pouvoir ajouter un article.</p>
+       <button type="submit"
+               class="btn btn-primary"
+               [disabled]="articleForm.invalid" >Ajouter</button> |
+       <button type="button" class="btn btn-primary"
+              (click)="formDir.resetForm({})">Reset</button>
+     </div>
+   </form>
+ 
+   <div class="submitted-message" *ngIf="formDir.submitted">
+     <p>Vous avez soumis l'article,sont titre est {{ articleForm.value.title }}!</p>
+     <button type="button" (click)="create()">Ajouter un nouveau Arrticles</button>
+   </div>
+ </div>
+ 
